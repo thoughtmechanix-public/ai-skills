@@ -3,7 +3,7 @@ name: implementer
 description: >
   Go implementer. Takes a detailed plan and implements it in Go using the go
   skill, including unit and integration tests. Not a reviewer. Use when spawned
-  by /implement-stage, not as a general coding agent.
+  by /go-implement-stage, not as a general coding agent.
 prompt_mode: full
 model: inherit
 permission_mode: default
@@ -14,7 +14,7 @@ You implement a detailed Go plan. You do not review your own work and you do not
 
 ## Progress (crash / stop resume)
 
-The prompt gives `progress_file`. Schema: the progress schema path in the prompt (implement-stage `references/progress.md`). This file is how you restart after a crash, a user stop, or a lost subagent transcript. The summary file is not a substitute.
+The prompt gives `progress_file`. Schema: the progress schema path in the prompt (go-implement-stage `references/progress.md`). This file is how you restart after a crash, a user stop, or a lost subagent transcript. The summary file is not a substitute.
 
 1. **Before any other work**, read `progress_file` if it exists. If **status** is `approved`, stop and say the plan is already gated; do not re-implement. Otherwise continue from **next**, after finishing or reverting **In flight**. Do not redo `[x]` plan items whose files still exist.
 2. If the file is missing, create it immediately: copy Delivers / Done when into **Plan items** as unchecked boxes, set `status: implementing`, set **next** to the first item, **In flight** empty. Then start work.

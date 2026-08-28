@@ -30,7 +30,7 @@ Domains: `core` (hooks that apply to every session), `ai`, `go`, `git`.
 ## Agent rules
 
 - One agent per `plugins/<domain>/agents/<name>.md`. Frontmatter `name` must match the filename stem.
-- Keep an agent with the skill that spawns it. `/implement-stage` and its four gates (`implementer`, `feature-review`, `code-review`, `test-review`) live together in `go`.
+- Keep an agent with the skill that spawns it. `/go-implement-stage` and its four gates (`implementer`, `feature-review`, `code-review`, `test-review`) live together in `go`.
 - Refer to other skills by **name** (`go`, `go-code-review`), not `~/.grok/skills/` or a consuming repo's `.grok/`.
 - Schema files the agent must follow live in the skill's `references/`. The orchestrator passes those absolute paths in the spawn prompt. Do not assume they exist under the workspace `.grok/`.
 - Plugin spawn type is the agent name; if the catalog only lists a qualified form, use `<plugin>:<name>`.

@@ -1,24 +1,24 @@
 ---
-name: detail-plan
+name: go-detail-plan
 description: >
   Turn a Go project's stage of work into a detailed implementation plan:
   interrogate the user for open decisions, then write step-by-step code layout,
   dependencies and blockers, and specific unit/integration test cases. Use when
-  the user runs /detail-plan, says "detail stage N", "detailed plan for stage 0",
-  or asks to flesh out a stage before /implement-stage.
+  the user runs /go-detail-plan, says "detail stage N", "detailed plan for stage 0",
+  or asks to flesh out a stage before /go-implement-stage.
 ---
 
-You write a **detailed implementation plan** for one unit of Go work. You do not implement source and you do not run `/implement-stage`.
+You write a **detailed implementation plan** for one unit of Go work. You do not implement source and you do not run `/go-implement-stage`.
 
-The stage map is the source of *what* and *done when*. This skill produces *how*: files, signatures, order, blockers, and named tests. The implementer (`/implement-stage`) is the only consumer that writes code.
+The stage map is the source of *what* and *done when*. This skill produces *how*: files, signatures, order, blockers, and named tests. The implementer (`/go-implement-stage`) is the only consumer that writes code.
 
 ## Invocation
 
 ```
-/detail-plan <stage>
-/detail-plan 0
-/detail-plan foundation
-/detail-plan --stage 3
+/go-detail-plan <stage>
+/go-detail-plan 0
+/go-detail-plan foundation
+/go-detail-plan --stage 3
 ```
 
 `<stage>` is a number or a unique title substring from the stage map. If missing, list the stage titles from the map and ask which one.
@@ -76,11 +76,11 @@ Requirements for the body:
 - **Dependencies and blockers** are concrete paths or prior **Done when** lines, not vibes.
 - **Test cases** are specific (name, package, setup, input, want, wantErr). Cover happy path, the error/edge cases the stage's Done when implies, and at least one integration case with `//go:build integration` for the plan's public behavior. Unit tests are table-driven names, not "add tests."
 - **Out of scope** is later work the stage map names plus user deferrals.
-- The last section tells the user to run `/implement-stage <output-path>` after they accept the file.
+- The last section tells the user to run `/go-implement-stage <output-path>` after they accept the file.
 
 ### 4. Confirm
 
-Show the path and a short outline (step titles + test count). Ask whether to adjust. Edit the same file until they accept. Then stop — do not start implementation unless they explicitly run `/implement-stage` or ask to implement.
+Show the path and a short outline (step titles + test count). Ask whether to adjust. Edit the same file until they accept. Then stop — do not start implementation unless they explicitly run `/go-implement-stage` or ask to implement.
 
 ## Rules
 
@@ -88,4 +88,4 @@ Show the path and a short outline (step titles + test count). Ask whether to adj
 - Never implement or edit Go source as part of this skill.
 - If a choice would violate the stage map or a named spec, say so and keep the map/spec.
 - If a choice would violate a Go skill, the Go skill wins; do not write a competing convention into the plan.
-- Feature-review will grade `/implement-stage` against this file; vague tests ("good coverage") are a failed plan — rewrite them before finishing.
+- Feature-review will grade `/go-implement-stage` against this file; vague tests ("good coverage") are a failed plan — rewrite them before finishing.

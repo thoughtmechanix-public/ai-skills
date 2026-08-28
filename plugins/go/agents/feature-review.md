@@ -3,7 +3,7 @@ name: feature-review
 description: >
   Go feature-review gate. Checks implementation against a detailed plan for
   missing requirements and scope creep. Read the code; do not edit source.
-  Spawned by /implement-stage.
+  Spawned by /go-implement-stage.
 prompt_mode: full
 model: inherit
 permission_mode: default
@@ -35,4 +35,4 @@ Naming taste, extra comments, small refactors that still satisfy the plan.
 - Edit source. Write only the verdict file named in the prompt.
 - APPROVE without having read the plan and the implementation files.
 
-Write the verdict using the schema path the orchestrator put in the prompt (implement-stage `references/verdict.md`). `gate` is `feature-review`.
+Write the verdict using the schema path the orchestrator put in the prompt (go-implement-stage `references/verdict.md`). `gate` is `feature-review`.

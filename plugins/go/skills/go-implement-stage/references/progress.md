@@ -1,14 +1,14 @@
 # Implementer progress file
 
-Durable working state for `/implement-stage`. Lives in the workspace (not `/tmp`) so a killed session can continue.
+Durable working state for `/go-implement-stage`. Lives in the workspace (not `/tmp`) so a killed session can continue.
 
-Path: `<repo>/.grok/implement-stage/progress/<plan-stem>.md`  
-Example: plan `plans/stage-0.md` → `.grok/implement-stage/progress/stage-0.md`
+Path: `<repo>/.grok/go-implement-stage/progress/<plan-stem>.md`  
+Example: plan `plans/stage-0.md` → `.grok/go-implement-stage/progress/stage-0.md`
 
 The implementer rewrites this file after every completed unit of work. The orchestrator updates only the **Orchestrator** section.
 
 ```markdown
-# Implement-stage progress
+# go-implement-stage progress
 
 - **plan**: <absolute plan path>
 - **status**: implementing | waiting-gates | fixing | approved | stopped

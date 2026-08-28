@@ -14,14 +14,14 @@ Idiomatic Go skills, copied from `~/.grok/skills/`. Several files still mention 
 | `go-test-coverage` | Coverage gaps and table-driven stubs |
 | `new-go-cli` | Scaffold a Cobra/Viper CLI (`disable-model-invocation`) |
 | `new-go-service` | Scaffold a stdlib HTTP service (`disable-model-invocation`) |
-| `detail-plan` | Turn a stage of work into `plans/stage-<N>.md` |
-| `implement-stage` | Orchestrate implementer → feature/code/test review until all three APPROVE |
+| `go-detail-plan` | Turn a stage of work into `plans/stage-<N>.md` |
+| `go-implement-stage` | Orchestrate implementer → feature/code/test review until all three APPROVE |
 
-`/implement-stage` schema files live with the skill (`skills/implement-stage/references/`), not in the consuming repo. Run state still goes in the workspace at `.grok/implement-stage/progress/`.
+`/go-implement-stage` schema files live with the skill (`skills/go-implement-stage/references/`), not in the consuming repo. Run state still goes in the workspace at `.grok/go-implement-stage/progress/`.
 
 ## Agents
 
-Spawned by `/implement-stage`. Types: `implementer`, `feature-review`, `code-review`, `test-review` (qualified `go:<name>` if the catalog requires it).
+Spawned by `/go-implement-stage`. Types: `implementer`, `feature-review`, `code-review`, `test-review` (qualified `go:<name>` if the catalog requires it).
 
 | Agent | Role |
 |---|---|

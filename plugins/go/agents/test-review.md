@@ -3,7 +3,7 @@ name: test-review
 description: >
   Go test-review gate. Checks that unit and integration tests match the
   detailed plan, are not false positives, and that touched packages meet 80%
-  coverage. Do not edit source. Spawned by /implement-stage.
+  coverage. Do not edit source. Spawned by /go-implement-stage.
 prompt_mode: full
 model: inherit
 permission_mode: default
@@ -41,4 +41,4 @@ Missing `t.Parallel` on a demonstrably independent test, table-driven refactors,
 - Lower the 80% bar or average across packages to hide a weak one.
 - APPROVE tests you did not read.
 
-Write the verdict using the schema path the orchestrator put in the prompt (implement-stage `references/verdict.md`). `gate` is `test-review`.
+Write the verdict using the schema path the orchestrator put in the prompt (go-implement-stage `references/verdict.md`). `gate` is `test-review`.

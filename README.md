@@ -11,7 +11,7 @@ This repo is meant to be the source of truth for those files. Point Grok at the 
 plugins/
   core/                         session-wide hooks (no domain skills)
   ai/                           reserved for AI-generic skills (none yet)
-  go/                           Go skills, detail-plan, implement-stage, review agents, gofmt-after-edit
+  go/                           Go skills, go-detail-plan, go-implement-stage, review agents, gofmt-after-edit
   git/                          git skills, plus force-push guard
 scripts/
   install.sh                    register this checkout with Grok
@@ -79,13 +79,13 @@ Requires `python3`. Uses `grok plugin validate` when `grok` is on `PATH`.
 | Plugin | Status | Contents |
 |---|---|---|
 | `core` | ready | `SessionStart` log, destructive-command deny, tool-use log |
-| `go` | ready | Hub skill plus audits, coverage, CLI/service scaffolding; `detail-plan`, `implement-stage`, and review agents; `gofmt` after `.go` edits |
+| `go` | ready | Hub skill plus audits, coverage, CLI/service scaffolding; `go-detail-plan`, `go-implement-stage`, and review agents; `gofmt` after `.go` edits |
 | `ai` | empty | Reserved for AI-generic skills. Go planning and implementation live in `go`. |
 | `git` | ready | `/git-commit`, `/git-prepare-pr`; blocks `git push --force` / `-f` to `main` or `master` |
 
 Go skills were copied from `~/.grok/skills/` (the Gopher Guides–derived set). Some of those files still mention `.github/skills/scripts/` and a Gopher Guides API; those helpers are not in this repo.
 
-`detail-plan`, `implement-stage`, and the four review agents live in the `go` plugin. Schema files travel with `implement-stage`; per-run progress still belongs in the consuming repo under `.grok/implement-stage/progress/`.
+`go-detail-plan`, `go-implement-stage`, and the four review agents live in the `go` plugin. Schema files travel with `go-implement-stage`; per-run progress still belongs in the consuming repo under `.grok/go-implement-stage/progress/`.
 
 ## Adding content
 

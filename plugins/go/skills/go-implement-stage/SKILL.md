@@ -1,9 +1,9 @@
 ---
-name: implement-stage
+name: go-implement-stage
 description: >
   Orchestrate the Go implementer through three approval gates (feature-review,
   code-review, test-review) against a detailed plan. Use when the user
-  runs /implement-stage, says "implement this stage", or hands a detailed plan
+  runs /go-implement-stage, says "implement this stage", or hands a detailed plan
   to implement. The implementer cannot finish without all three gates APPROVE.
 ---
 
@@ -23,7 +23,7 @@ This skill ships in the `go` plugin. Schema files live next to this `SKILL.md`, 
 - Verdict schema: `references/verdict.md`
 - Sibling agents: `../../agents/implementer.md`, `../../agents/feature-review.md`, `../../agents/code-review.md`, `../../agents/test-review.md`
 
-Read the two schema files once. Pass those **absolute** paths into every spawn prompt as the schema/verdict path. Durable run state still goes in the workspace: `<repo>/.grok/implement-stage/progress/`.
+Read the two schema files once. Pass those **absolute** paths into every spawn prompt as the schema/verdict path. Durable run state still goes in the workspace: `<repo>/.grok/go-implement-stage/progress/`.
 
 Spawn `subagent_type` using the agent `name` (`implementer`, `feature-review`, `code-review`, `test-review`). If the catalog only lists the qualified plugin form, use `go:<name>`. If neither exists, spawn `general-purpose` and prepend the matching `../../agents/<name>.md`.
 
@@ -36,12 +36,12 @@ Emit `spawn_subagent` in the same response as any claim that an agent launched. 
 ## Invocation
 
 ```
-/implement-stage <plan-path>
-/implement-stage --plan <plan-path>
-/implement-stage --fresh <plan-path>
+/go-implement-stage <plan-path>
+/go-implement-stage --plan <plan-path>
+/go-implement-stage --fresh <plan-path>
 ```
 
-`<plan-path>` is required (a detailed implementation plan, typically `plans/stage-<N>.md` from `/detail-plan`, not a stage map). If missing, ask for it and stop.
+`<plan-path>` is required (a detailed implementation plan, typically `plans/stage-<N>.md` from `/go-detail-plan`, not a stage map). If missing, ask for it and stop.
 
 `--fresh` ignores an existing progress file for that plan and starts the implementer from scratch (does not delete source). Without `--fresh`, a non-`approved` progress file is a resume.
 
@@ -58,7 +58,7 @@ Validate `IMPL_ID` is 8 hex characters. Inline the absolute `scratch_dir` everyw
 Paths (stable for the run):
 
 - `plan_file` — user-supplied detailed plan (absolute)
-- `progress_file` — `<repo>/.grok/implement-stage/progress/<plan-stem>.md` (durable; survives crash/stop). Schema: `references/progress.md`
+- `progress_file` — `<repo>/.grok/go-implement-stage/progress/<plan-stem>.md` (durable; survives crash/stop). Schema: `references/progress.md`
 - `summary_file` — `${scratch_dir}/impl-summary-${IMPL_ID}.md`
 - `lint_file` — `${scratch_dir}/impl-lint-${IMPL_ID}.txt`
 - `coverage_file` — `${scratch_dir}/impl-cover-${IMPL_ID}.txt`
@@ -67,7 +67,7 @@ Paths (stable for the run):
 - `code_file` — `${scratch_dir}/impl-code-${IMPL_ID}.md`
 - `test_file` — `${scratch_dir}/impl-test-${IMPL_ID}.md`
 
-`plan-stem` is the plan filename without extension (`plans/stage-0.md` → `stage-0`). Create `<repo>/.grok/implement-stage/progress/` if needed.
+`plan-stem` is the plan filename without extension (`plans/stage-0.md` → `stage-0`). Create `<repo>/.grok/go-implement-stage/progress/` if needed.
 
 State: `round_count = 0`, `implementer_id`, `feature_id`, `code_id`, `test_id`, `resuming` (bool).
 
@@ -235,7 +235,7 @@ Return to Step 4.
 
 Mark the plan complete in the repo docs (orchestrator writes these; not an agent). Do this after `status: approved`, before the user-facing report.
 
-1. **Detailed plan** (`plan_file`): under `## Done when (this plan)`, change every `- [ ]` to `- [x]`. Set or add `- **Status:** done (gates approved)` in the heading metadata (same bullet list as **Execute with**). Replace a trailing "After you accept this file, run /implement-stage ..." line with `Implemented. Progress: <progress_file relative to repo>.`.
+1. **Detailed plan** (`plan_file`): under `## Done when (this plan)`, change every `- [ ]` to `- [x]`. Set or add `- **Status:** done (gates approved)` in the heading metadata (same bullet list as **Execute with**). Replace a trailing "After you accept this file, run /go-implement-stage ..." line with `Implemented. Progress: <progress_file relative to repo>.`.
 2. **Stage map:** if the plan names a stage map (or `staged-plan.md` exists at the repo root) and this plan corresponds to a stage heading, add or replace a `**Status:** done` line immediately after that heading. If no matching heading exists, say so in the report; do not invent a stage.
 3. **README:** if the repo has a current-status section (or equivalent), rewrite it so this plan's public behavior is accurate. Fix any sentence that still claims this plan's behavior does not exist. Do not add later-stage or **Out of scope** items.
 

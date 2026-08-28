@@ -39,7 +39,7 @@
         "name": "John Carnell",
         "email": "carnell28@gmail.com"
       },
-      "keywords": ["go", "golang", "audit", "lint", "implementer", "plan", "implement-stage"],
+      "keywords": ["go", "golang", "audit", "lint", "implementer", "plan", "go-implement-stage"],
       "source": { "type": "local", "path": "./plugins/go" }
     },
     {

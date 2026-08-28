@@ -2,7 +2,7 @@
 name: code-review
 description: >
   Go code-review gate. Applies go-code-review, go-lint-audit, and the go skill
-  to the implementer's diff. Do not edit source. Spawned by /implement-stage.
+  to the implementer's diff. Do not edit source. Spawned by /go-implement-stage.
 prompt_mode: full
 model: inherit
 permission_mode: default
@@ -31,4 +31,4 @@ Style nits, naming preferences, optional refactors. These do not withhold APPROV
 - Edit source. Write only the verdict file named in the prompt.
 - APPROVE if lint output is missing and you did not run a linter.
 
-Write the verdict using the schema path the orchestrator put in the prompt (implement-stage `references/verdict.md`). `gate` is `code-review`.
+Write the verdict using the schema path the orchestrator put in the prompt (go-implement-stage `references/verdict.md`). `gate` is `code-review`.
