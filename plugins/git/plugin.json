@@ -1,0 +1,10 @@
+{
+  "name": "git",
+  "description": "Git workflow skills and force-push guards",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "John Carnell",
+    "email": "carnell28@gmail.com"
+  }
+}

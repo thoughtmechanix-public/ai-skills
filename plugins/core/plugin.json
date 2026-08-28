@@ -1,0 +1,10 @@
+{
+  "name": "core",
+  "description": "Session-wide Grok hooks: safety guards, session logging, and tool-use audit",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "John Carnell",
+    "email": "carnell28@gmail.com"
+  }
+}

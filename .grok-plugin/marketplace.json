@@ -1,0 +1,58 @@
+{
+  "name": "personal-skills",
+  "description": "Personal Grok skills, hooks, and scripts for AI work, Go, and git",
+  "owner": {
+    "name": "John Carnell",
+    "email": "carnell28@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "core",
+      "description": "Session-wide Grok hooks: safety guards, session logging, and tool-use audit",
+      "category": "development",
+      "version": "0.1.0",
+      "author": {
+        "name": "John Carnell",
+        "email": "carnell28@gmail.com"
+      },
+      "keywords": ["hooks", "safety", "session"],
+      "source": { "type": "local", "path": "./plugins/core" }
+    },
+    {
+      "name": "ai",
+      "description": "AI-generic skills (Go planning and implementation live in the go plugin)",
+      "category": "productivity",
+      "version": "0.1.0",
+      "author": {
+        "name": "John Carnell",
+        "email": "carnell28@gmail.com"
+      },
+      "keywords": ["ai"],
+      "source": { "type": "local", "path": "./plugins/ai" }
+    },
+    {
+      "name": "go",
+      "description": "Idiomatic Go skills, audits, scaffolding, staged planning, and gated implementation",
+      "category": "development",
+      "version": "0.1.0",
+      "author": {
+        "name": "John Carnell",
+        "email": "carnell28@gmail.com"
+      },
+      "keywords": ["go", "golang", "audit", "lint", "implementer", "plan", "implement-stage"],
+      "source": { "type": "local", "path": "./plugins/go" }
+    },
+    {
+      "name": "git",
+      "description": "Git workflow skills and force-push guards",
+      "category": "development",
+      "version": "0.1.0",
+      "author": {
+        "name": "John Carnell",
+        "email": "carnell28@gmail.com"
+      },
+      "keywords": ["git", "commit", "pull-request"],
+      "source": { "type": "local", "path": "./plugins/git" }
+    }
+  ]
+}

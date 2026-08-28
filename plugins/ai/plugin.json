@@ -1,0 +1,10 @@
+{
+  "name": "ai",
+  "description": "AI-generic skills (Go planning and implementation live in the go plugin)",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "John Carnell",
+    "email": "carnell28@gmail.com"
+  }
+}

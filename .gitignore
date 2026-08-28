@@ -1,0 +1,10 @@
+.DS_Store
+*.swp
+*~
+*.log
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+coverage.out
+coverage.html
