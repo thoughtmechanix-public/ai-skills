@@ -1,16 +1,20 @@
 # Implementer progress file
 
-Durable working state for `/go-implement-stage`. Lives in the workspace (not `/tmp`) so a killed session can continue.
+Durable working state for `/go-implement-stage`. Lives in the parent workspace `.grok/` (not `/tmp`, not the implementer worktree) so a killed session can continue.
 
 Path: `<repo>/.grok/go-implement-stage/progress/<plan-stem>.md`  
 Example: plan `plans/stage-0.md` → `.grok/go-implement-stage/progress/stage-0.md`
 
-The implementer rewrites this file after every completed unit of work. The orchestrator updates only the **Orchestrator** section.
+The implementer rewrites this file after every completed unit of work. The orchestrator updates only the **Orchestrator** section. **Files** and checklist evidence refer to the **worktree** path.
 
 ```markdown
 # go-implement-stage progress
 
 - **plan**: <absolute plan path>
+- **worktree**: <absolute implementer worktree path>
+- **branch**: impl/<plan-stem>
+- **fizzy_card**: <card number currently In-progress, or empty>
+- **pr**: <GitHub PR URL or empty>
 - **status**: implementing | waiting-gates | fixing | approved | stopped
 - **next**: <one imperative sentence for the restarted agent>
 - **updated**: <ISO-8601 UTC if known, else a short human stamp>
@@ -54,3 +58,4 @@ Rules:
 - Do not mark a plan item `[x]` until the files for it exist on disk.
 - `status: approved` is set only by the orchestrator after all three gates APPROVE.
 - On restart, the implementer reads this file first and continues at **next**, after resolving **In flight**.
+- Keep **worktree**, **branch**, **fizzy_card**, and **pr**. A resume without a live directory at **worktree** is not restartable (work is uncommitted in that tree).

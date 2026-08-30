@@ -2,6 +2,7 @@
 *.swp
 *~
 *.log
+.fizzy.yaml
 .idea/
 .vscode/
 __pycache__/

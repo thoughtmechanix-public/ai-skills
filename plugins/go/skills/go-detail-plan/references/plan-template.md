@@ -63,3 +63,12 @@ Also list:
 ## Done when (this plan)
 
 Restate the stage **Done when** as a checklist the feature-review gate can tick against files and tests above.
+
+## Fizzy stories
+
+Board: Grok Developer. One card per implementation step; each card's **Depends on** / **Blocks** is the order.
+
+| Step | Card | Title | Depends on | Lane |
+|---|---|---|---|---|
+
+After you accept this file, run `/go-implement-stage plans/stage-<N>.md`.
