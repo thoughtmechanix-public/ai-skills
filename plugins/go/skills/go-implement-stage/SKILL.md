@@ -7,7 +7,7 @@ description: >
   to implement. The implementer cannot finish without all three gates APPROVE.
 ---
 
-You are the orchestrator for Go plan implementation. You coordinate only. You do **not** implement Go source, fix review items, author gate verdicts, commit, or open the GitHub PR. The only writes you make are progress/Orchestrator fields, measurement artifacts, the merged verdict, and Step 6 completion-doc updates in the implementer worktree. The implementer follows `git-commit` and `git-prepare-pr` in **Finish**.
+You are the orchestrator for Go plan implementation. You coordinate only. You do **not** implement Go source, fix review items, or author gate verdicts. The only writes you make are progress/Orchestrator fields, measurement artifacts, the merged verdict, Step 6 completion-doc updates in the implementer worktree, and — after all three gates APPROVE — the local commit, GitHub PR, and Fizzy Ready For PR updates.
 
 **AND-gate:** the plan is done only when `feature-review`, `code-review`, and `test-review` each write `verdict: APPROVE` in the same round. Advisory nits do not block. Blocking kinds are defined in `references/verdict.md`.
 
@@ -251,17 +251,8 @@ Mark the plan complete in the **worktree** docs (orchestrator writes these; not 
 2. **Stage map:** if the plan names a stage map (or `staged-plan.md` exists at the worktree root) and this plan corresponds to a stage heading, add or replace a `**Status:** done` line immediately after that heading. If no matching heading exists, say so in the report; do not invent a stage.
 3. **README:** if the worktree has a current-status section (or equivalent), rewrite it so this plan's public behavior is accurate. Fix any sentence that still claims this plan's behavior does not exist. Do not add later-stage or **Out of scope** items.
 
-4. **Finish.** Resume the implementer (`resume_from: implementer_id`, `description: [implementer] commit and PR`). If `resume_from` fails, spawn a new implementer with `cwd: <worktree_path>` (not `isolation: worktree`).
-
-```
-Gates APPROVE. Finish in the worktree on <branch>.
-1. Follow the git-commit skill (full procedure) in this worktree.
-2. Follow the git-prepare-pr skill (full procedure) in this worktree.
-3. After a PR URL exists, update each open Fizzy stories card: append a Pull request section with the change summary and a markdown link to the GitHub PR, then move the card to Ready For PR. Write **pr** into <progress_file>.
-Follow the implementer **Finish** section. Do not invent a parallel git recipe.
-```
-
-Wait until it completes. Confirm `progress_file` has **pr**. If Finish aborts (user abort, no `gh`, push failed), report the worktree/branch and stop — do not treat Fizzy as updated.
+4. **Commit and PR (orchestrator, no user accept).** After the docs above, in `worktree_path` on `<branch>`, follow `git-commit` then `git-prepare-pr`. Treat that worktree as the git workspace (`git -C <worktree_path>` / `cd` there for `gh`). Do not ask the user to accept the summary, message, or PR draft — gates APPROVE is the authorization. Skip the `git-commit` tag prompt (do not tag). Keep every other rule from those skills (templates, secret exclusion, no `--no-verify`, no `--force`/`-f`, default branch as base, no second PR, prefer `gh`). If the tree is already clean, skip `git-commit` and continue to `git-prepare-pr`. If `gh` is missing or push/create fails, report the local commit and stop — do not update Fizzy.
+5. **Fizzy Ready For PR.** Only after a PR URL exists. Follow the `fizzy` skill. For each open card in the plan **Fizzy stories** table: keep the existing description and append a **Pull request** section with the `git-commit` change summary (or the PR Summary) and the GitHub PR URL as a markdown link (`fizzy card update <number> --description_file`). Move the card to **Ready For PR** (`fizzy column list --board`, name match case-insensitive; create the column if missing). Write **pr** into `progress_file`.
 
 Then report:
 
@@ -295,5 +286,5 @@ Present remaining open blocking items grouped by gate. Ask the user to pick: kee
 - The implementer must keep `progress_file` current; a run without that file is not restartable.
 - First implementer spawn uses `isolation: worktree`. Resume a live implementer with `resume_from`. A new implementer or any gate uses `cwd: <worktree_path>`. Never `isolation: worktree` for gates.
 - Never merge `<branch>` into the parent checkout.
-- After docs, Step 6 resumes the implementer to **Finish**: `git-commit` then `git-prepare-pr`, then Fizzy card updates. Do not commit or open the PR yourself.
+- After docs, Step 6 follows `git-commit` then `git-prepare-pr` in the worktree **without user accept**, then updates Fizzy cards. Do not resume the implementer for commit/PR.
 - Go standards live in the `go` skill; do not fork them into prompts.

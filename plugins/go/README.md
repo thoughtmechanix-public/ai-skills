@@ -15,7 +15,7 @@ Idiomatic Go skills, copied from `~/.grok/skills/`. Several files still mention 
 | `new-go-cli` | Scaffold a Cobra/Viper CLI (`disable-model-invocation`) |
 | `new-go-service` | Scaffold a stdlib HTTP service (`disable-model-invocation`) |
 | `go-detail-plan` | Turn a stage of work into `plans/stage-<N>.md`, then one Fizzy card per step on Grok Developer |
-| `go-implement-stage` | Orchestrate implementer → feature/code/test review until all three APPROVE, then the implementer runs `git-commit` and `git-prepare-pr` and updates Fizzy cards |
+| `go-implement-stage` | Orchestrate implementer → feature/code/test review until all three APPROVE, then the orchestrator commits, opens a GitHub PR, and updates Fizzy cards |
 
 `/go-implement-stage` schema files live with the skill (`skills/go-implement-stage/references/`), not in the consuming repo. Run state still goes in the workspace at `.grok/go-implement-stage/progress/`.
 
@@ -25,7 +25,7 @@ Spawned by `/go-implement-stage`. Types: `implementer`, `feature-review`, `code-
 
 | Agent | Role |
 |---|---|
-| `implementer` | Write the plan in Go in an isolated worktree on `impl/<plan-stem>`; take Fizzy stories to In-progress; after gates, follow `git-commit` and `git-prepare-pr`, then put the change summary and PR link on each Fizzy card |
+| `implementer` | Write the plan in Go in an isolated worktree on `impl/<plan-stem>`; take Fizzy stories to In-progress; keep the progress file current |
 | `feature-review` | Plan compliance only |
 | `code-review` | Diff against `go`, `go-code-review`, `go-lint-audit` |
 | `test-review` | Plan-named tests, false positives, 80% coverage on touched packages |
