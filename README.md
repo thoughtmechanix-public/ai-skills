@@ -1,6 +1,6 @@
 # personal-skills
 
-A Grok plugin marketplace of personal skills, hooks, and scripts for AI work, Go, and git.
+A Grok plugin marketplace of personal skills, hooks, and scripts for AI work, Go, TypeScript, and git.
 
 This repo is meant to be the source of truth for those files. Point Grok at the checkout and edit here; do not treat `~/.grok/skills/` as the canonical copy.
 
@@ -10,8 +10,9 @@ This repo is meant to be the source of truth for those files. Point Grok at the 
 .grok-plugin/marketplace.json   catalog Grok reads
 plugins/
   core/                         session-wide hooks (no domain skills)
-  ai/                           reserved for AI-generic skills (none yet)
+  ai/                           stage-plan: high-level plans/staged-plan.md
   go/                           Go skills, go-detail-plan, go-implement-stage, review agents, gofmt-after-edit
+  typescript/                   TypeScript skills, typescript-detail-plan, typescript-implement-stage, review agents, format-after-edit
   git/                          git skills, plus force-push guard
 scripts/
   install.sh                    register this checkout with Grok
@@ -41,7 +42,7 @@ From this directory:
 ./scripts/install.sh
 ```
 
-That makes hook handlers executable, adds this folder as a local marketplace, and installs the four plugins with trust enabled so hooks can run.
+That makes hook handlers executable, adds this folder as a local marketplace, and installs the plugins with trust enabled so hooks can run.
 
 To attach the live checkout instead of an installed snapshot (better while you are still adding skills):
 
@@ -80,10 +81,13 @@ Requires `python3`. Uses `grok plugin validate` when `grok` is on `PATH`.
 |---|---|---|
 | `core` | ready | `SessionStart` log, destructive-command deny, tool-use log |
 | `go` | ready | Hub skill plus audits, coverage, CLI/service scaffolding; `go-detail-plan`, `go-implement-stage`, and review agents; `gofmt` after `.go` edits |
-| `ai` | empty | Reserved for AI-generic skills. Go planning and implementation live in `go`. |
+| `typescript` | ready | Same shape as `go` for TypeScript: hub, audits, coverage, CLI/service scaffolding, `typescript-detail-plan`, `typescript-implement-stage`, review agents; Biome or Prettier after `.ts` edits |
+| `ai` | ready | `/stage-plan` writes `plans/staged-plan.md`. Detail plans stay in `go` and `typescript`. |
 | `git` | ready | `/git-commit`, `/git-prepare-pr`; blocks `git push --force` / `-f` to `main` or `master` |
 
 Go skills were copied from `~/.grok/skills/` (the Gopher Guides–derived set). Some of those files still mention `.github/skills/scripts/` and a Gopher Guides API; those helpers are not in this repo.
+
+`/stage-plan` (plugin `ai`) writes the high-level map at `plans/staged-plan.md`. `/go-detail-plan` and `/typescript-detail-plan` read it and write `plans/stage-<N>.md`.
 
 `go-detail-plan`, `go-implement-stage`, and the four review agents live in the `go` plugin. Schema files travel with `go-implement-stage`; per-run progress still belongs in the consuming repo under `.grok/go-implement-stage/progress/`.
 

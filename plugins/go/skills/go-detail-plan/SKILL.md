@@ -24,7 +24,7 @@ The stage map is the source of *what* and *done when*. This skill produces *how*
 
 `<stage>` is a number or a unique title substring from the stage map. If missing, list the stage titles from the map and ask which one.
 
-Default stage map: `staged-plan.md` at the repo root. If that file is missing, ask for the map path (or confirm a one-off slice of work with no map). Do not assume a fixed number of stages or a fixed set of titles.
+Default stage map: `plans/staged-plan.md` (written by `/stage-plan`). If that file is missing, use `staged-plan.md` at the repo root. If both are missing, ask for the map path (or confirm a one-off slice of work with no map). Do not assume a fixed number of stages or a fixed set of titles.
 
 Output path: `plans/stage-<N>.md` when the stage is numbered; otherwise `plans/<slug>.md`. Example: Stage 0 → `plans/stage-0.md`.
 
@@ -68,7 +68,7 @@ Record answers; they become the Decisions table.
 
 ### 3. Write the plan
 
-Create `plans/` if needed. Write the output file using the headings in `references/plan-template.md` (same heading names, filled in). Leave **Fizzy stories** as an empty table; step 5 fills it.
+Create `plans/` if needed. Write the output file using the headings in `references/plan-template.md` (same heading names, filled in). Set **Stage map** to the path you loaded. Leave **Fizzy stories** as an empty table; step 5 fills it.
 
 Requirements for the body:
 

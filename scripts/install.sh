@@ -8,7 +8,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 GROK_HOME="${GROK_HOME:-$HOME/.grok}"
 CONFIG="$GROK_HOME/config.toml"
-PLUGINS=(core ai go git)
+PLUGINS=(core ai go typescript git)
 MODE="marketplace"
 
 usage() {
@@ -55,9 +55,10 @@ paths = [
   "$ROOT/plugins/core",
   "$ROOT/plugins/ai",
   "$ROOT/plugins/go",
+  "$ROOT/plugins/typescript",
   "$ROOT/plugins/git",
 ]
-enabled = ["core", "ai", "go", "git"]
+enabled = ["core", "ai", "go", "typescript", "git"]
 EOF
   )
 
