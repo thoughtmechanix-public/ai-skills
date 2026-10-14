@@ -1,7 +1,8 @@
 # Sourced from ~/.bashrc by shell/install.sh. Loads lib + bash functions.
 
-_ps_bash_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-_ps_shell_root="$(cd -- "$_ps_bash_dir/.." && pwd)"
+# builtin: Omarchy aliases cd to zd, whose stdout would be captured here.
+_ps_bash_dir="$(builtin cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+_ps_shell_root="$(builtin cd -- "$_ps_bash_dir/.." && pwd)"
 
 . "$_ps_shell_root/lib/clipboard.sh"
 . "$_ps_shell_root/lib/how-query.sh"

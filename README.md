@@ -42,15 +42,11 @@ From this directory:
 ./scripts/install.sh
 ```
 
-That makes hook handlers executable, adds this folder as a local marketplace, and installs the plugins with trust enabled so hooks can run.
+That makes hook handlers executable, adds this folder as a local marketplace, and installs each plugin with trust so its skills load. The install is a snapshot under `~/.grok/installed-plugins/`. Run the same command again after you add or edit a plugin. A plugin that is already installed is replaced from this checkout; `--keep-data` keeps its plugin data.
 
-To attach the live checkout instead of an installed snapshot (better while you are still adding skills):
+`[plugins].paths` does not turn a plugin on. A path-only plugin stays disabled even when its bare name is in `[plugins].enabled`, so its skills never load. `./scripts/install.sh --paths` still installs and trusts the plugins. The path list is only extra config.
 
-```bash
-./scripts/install.sh --paths
-```
-
-That appends the plugin directories to `[plugins].paths` in `~/.grok/config.toml` (or `$GROK_HOME/config.toml`). Restart Grok or press `r` in the Plugins tab.
+Restart Grok, or press `r` in the Plugins tab, then run `grok inspect`.
 
 Interactive zsh/bash helpers are separate:
 
