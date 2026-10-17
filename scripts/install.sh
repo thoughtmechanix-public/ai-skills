@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
-# Register this checkout with Grok.
+# Register this checkout with Grok and install each plugin with trust.
 #
-#   ./scripts/install.sh           add marketplace + install/trust plugins
-#   ./scripts/install.sh --paths   point [plugins].paths at this checkout
+#   ./scripts/install.sh           marketplace add + install/trust plugins
+#   ./scripts/install.sh --paths   same install, and append [plugins].paths
+#
+# A path entry does not enable a plugin. Grok leaves path-only plugins
+# disabled, so skills load only from the trusted install under $GROK_HOME.
+# Re-running replaces an existing snapshot from this checkout.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 GROK_HOME="${GROK_HOME:-$HOME/.grok}"
 CONFIG="$GROK_HOME/config.toml"
-PLUGINS=(core ai go git)
+PLUGINS=(core ai go typescript git)
 MODE="marketplace"
 
 usage() {
@@ -16,7 +20,10 @@ usage() {
 Usage: $(basename "$0") [--paths|--marketplace]
 
   --marketplace  (default) grok plugin marketplace add + install --trust
-  --paths        append this checkout to [plugins].paths in $CONFIG
+  --paths        also append plugin dirs to [plugins].paths in $CONFIG
+
+Path entries do not load skills. Both modes install and trust every plugin.
+Re-running refreshes an installed snapshot from this checkout.
 EOF
 }
 
@@ -55,9 +62,10 @@ paths = [
   "$ROOT/plugins/core",
   "$ROOT/plugins/ai",
   "$ROOT/plugins/go",
+  "$ROOT/plugins/typescript",
   "$ROOT/plugins/git",
 ]
-enabled = ["core", "ai", "go", "git"]
+enabled = ["core", "ai", "go", "typescript", "git"]
 EOF
   )
 
@@ -85,7 +93,7 @@ EOF
 install_marketplace() {
   if ! command -v grok >/dev/null 2>&1; then
     echo "grok is not on PATH; chmod'd scripts only." >&2
-    echo "Install grok, then re-run, or use --paths." >&2
+    echo "Install grok, then re-run." >&2
     return 1
   fi
 
@@ -97,16 +105,34 @@ install_marketplace() {
 
   local name
   for name in "${PLUGINS[@]}"; do
-    grok plugin install "$ROOT/plugins/$name" --trust
-    grok plugin enable "$name" || true
+    install_one "$name"
   done
+}
+
+install_one() {
+  local name="$1"
+  local src="$ROOT/plugins/$name"
+
+  if grok plugin details "$name" >/dev/null 2>&1; then
+    echo "refreshing $name from $src"
+    grok plugin uninstall "$name" --confirm --keep-data
+  else
+    echo "installing $name from $src"
+  fi
+
+  grok plugin install "$src" --trust
+  grok plugin enable "$name" || true
 }
 
 chmod_scripts
 echo "made hook and skill scripts executable"
 
 case "$MODE" in
-  paths) append_plugin_paths ;;
+  paths)
+    # A listed path stays disabled. Still install so skills can load.
+    append_plugin_paths || true
+    install_marketplace
+    ;;
   marketplace) install_marketplace ;;
 esac
 

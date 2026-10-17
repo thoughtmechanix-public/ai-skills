@@ -1,6 +1,6 @@
 {
   "name": "ai",
-  "description": "AI-generic skills (Go planning and implementation live in the go plugin)",
+  "description": "Language-neutral planning. Stage maps for the go and typescript detail skills",
   "version": "0.1.0",
   "license": "MIT",
   "author": {

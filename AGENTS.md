@@ -17,7 +17,7 @@ This repository is a Grok plugin marketplace. Skills, hooks, and scripts live he
 | Shared logic for those functions | `shell/lib/` |
 | A user-facing executable on PATH | `shell/bin/` |
 
-Domains: `core` (hooks that apply to every session), `ai`, `go`, `git`.
+Domains: `core` (hooks that apply to every session), `ai`, `go`, `typescript`, `git`.
 
 ## Skill rules
 

@@ -1,6 +1,6 @@
 {
   "name": "personal-skills",
-  "description": "Personal Grok skills, hooks, and scripts for AI work, Go, and git",
+  "description": "Personal Grok skills, hooks, and scripts for AI work, Go, TypeScript, and git",
   "owner": {
     "name": "John Carnell",
     "email": "carnell28@gmail.com"
@@ -20,14 +20,14 @@
     },
     {
       "name": "ai",
-      "description": "AI-generic skills (Go planning and implementation live in the go plugin)",
+      "description": "Language-neutral planning. Stage maps for the go and typescript detail skills",
       "category": "productivity",
       "version": "0.1.0",
       "author": {
         "name": "John Carnell",
         "email": "carnell28@gmail.com"
       },
-      "keywords": ["ai"],
+      "keywords": ["ai", "plan", "stages", "stage-plan"],
       "source": { "type": "local", "path": "./plugins/ai" }
     },
     {
@@ -41,6 +41,18 @@
       },
       "keywords": ["go", "golang", "audit", "lint", "implementer", "plan", "go-implement-stage"],
       "source": { "type": "local", "path": "./plugins/go" }
+    },
+    {
+      "name": "typescript",
+      "description": "Idiomatic TypeScript skills, audits, scaffolding, staged planning, and gated implementation",
+      "category": "development",
+      "version": "0.1.0",
+      "author": {
+        "name": "John Carnell",
+        "email": "carnell28@gmail.com"
+      },
+      "keywords": ["typescript", "audit", "lint", "implementer", "plan", "typescript-implement-stage"],
+      "source": { "type": "local", "path": "./plugins/typescript" }
     },
     {
       "name": "git",

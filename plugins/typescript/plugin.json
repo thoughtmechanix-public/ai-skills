@@ -1,0 +1,10 @@
+{
+  "name": "typescript",
+  "description": "Idiomatic TypeScript skills, audits, scaffolding, staged planning, and gated implementation",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "John Carnell",
+    "email": "carnell28@gmail.com"
+  }
+}
