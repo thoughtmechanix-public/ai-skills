@@ -1,7 +1,7 @@
 {
   "name": "ai",
-  "description": "Language-neutral planning. Stage maps for the go and typescript detail skills",
-  "version": "0.1.0",
+  "description": "Language-neutral planning and gated implementation. Stage maps, and a task loop that takes the language and approach at kickoff",
+  "version": "0.2.0",
   "license": "MIT",
   "author": {
     "name": "John Carnell",

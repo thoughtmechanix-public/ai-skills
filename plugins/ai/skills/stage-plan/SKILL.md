@@ -6,12 +6,15 @@ description: >
   directory. Use when the user runs /stage-plan, asks to break work into
   stages, or wants a high-level plan before a language detail plan. Skip when
   they want one stage broken into files and tests (/go-detail-plan,
-  /typescript-detail-plan) or want that stage implemented.
+  /typescript-detail-plan), want that stage implemented by a language loop,
+  or want one task implemented in a language they name (/implement-task).
 ---
 
 You write a **stage map**. You do not write file layouts, test tables, or source, and you do not run a detail-plan or implement skill.
 
 `/go-detail-plan` and `/typescript-detail-plan` consume this file. They own *how*. This skill owns *what* and *done when*, split into stages.
+
+`/implement-task` is a separate loop. It takes one task plus a language and an approach. It does not read this stage map unless the user passes that file as the task.
 
 ## Invocation
 

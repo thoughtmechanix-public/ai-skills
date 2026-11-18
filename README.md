@@ -10,7 +10,7 @@ This repo is meant to be the source of truth for those files. Point Grok at the 
 .grok-plugin/marketplace.json   catalog Grok reads
 plugins/
   core/                         session-wide hooks (no domain skills)
-  ai/                           stage-plan: high-level plans/staged-plan.md
+  ai/                           stage-plan, plus language-agnostic implement-task and its review agents
   go/                           Go skills, go-detail-plan, go-implement-stage, review agents, gofmt-after-edit
   typescript/                   TypeScript skills, typescript-detail-plan, typescript-implement-stage, review agents, format-after-edit
   git/                          git skills, plus force-push guard
@@ -78,14 +78,14 @@ Requires `python3`. Uses `grok plugin validate` when `grok` is on `PATH`.
 | `core` | ready | `SessionStart` log, destructive-command deny, tool-use log |
 | `go` | ready | Hub skill plus audits, coverage, CLI/service scaffolding; `go-detail-plan`, `go-implement-stage`, and review agents; `gofmt` after `.go` edits |
 | `typescript` | ready | Same shape as `go` for TypeScript: hub, audits, coverage, CLI/service scaffolding, `typescript-detail-plan`, `typescript-implement-stage`, review agents; Biome or Prettier after `.ts` edits |
-| `ai` | ready | `/stage-plan` writes `plans/staged-plan.md`. Detail plans stay in `go` and `typescript`. |
+| `ai` | ready | `/stage-plan` writes `plans/staged-plan.md`. `/implement-task` implements one task in the language and approach named at kickoff, through feature-review and qa-review. |
 | `git` | ready | `/git-commit`, `/git-prepare-pr`; blocks `git push --force` / `-f` to `main` or `master` |
 
 Go skills were copied from `~/.grok/skills/` (the Gopher Guides–derived set). Some of those files still mention `.github/skills/scripts/` and a Gopher Guides API; those helpers are not in this repo.
 
-`/stage-plan` (plugin `ai`) writes the high-level map at `plans/staged-plan.md`. `/go-detail-plan` and `/typescript-detail-plan` read it and write `plans/stage-<N>.md`.
+`/stage-plan` (plugin `ai`) writes the high-level map at `plans/staged-plan.md`. `/go-detail-plan` and `/typescript-detail-plan` read it and write `plans/stage-<N>.md`. `/implement-task` (plugin `ai`) implements one task in a language and approach the user names. Both gates must APPROVE. Progress for that loop lives in the consuming repo under `.grok/implement-task/progress/`.
 
-`go-detail-plan`, `go-implement-stage`, and the four review agents live in the `go` plugin. Schema files travel with `go-implement-stage`; per-run progress still belongs in the consuming repo under `.grok/go-implement-stage/progress/`.
+`go-detail-plan`, `go-implement-stage`, and the four review agents live in the `go` plugin. Schema files travel with `go-implement-stage`; per-run progress still belongs in the consuming repo under `.grok/go-implement-stage/progress/`. The TypeScript plugin has the same loop. Those loops stay language-specific.
 
 ## Adding content
 

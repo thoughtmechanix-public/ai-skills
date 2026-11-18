@@ -20,14 +20,14 @@
     },
     {
       "name": "ai",
-      "description": "Language-neutral planning. Stage maps for the go and typescript detail skills",
+      "description": "Language-neutral planning and gated implementation. Stage maps, and a task loop that takes the language and approach at kickoff",
       "category": "productivity",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": {
         "name": "John Carnell",
         "email": "carnell28@gmail.com"
       },
-      "keywords": ["ai", "plan", "stages", "stage-plan"],
+      "keywords": ["ai", "plan", "stages", "stage-plan", "implement-task", "qa-review"],
       "source": { "type": "local", "path": "./plugins/ai" }
     },
     {
